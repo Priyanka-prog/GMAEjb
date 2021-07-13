@@ -2,16 +2,16 @@ package it.polimi.gma.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-//import java.util.List;
+import java.util.List;
 //import java.util.Date;
 
 @Entity
-//@Table(name="user", schema="gma")
+@Table(name="user", schema="gma")
 
-//@NamedQueries({
-	@NamedQuery(name = "User.checkCredentials", query = "SELECT r FROM User r  WHERE r.username = ?1 and r.password = ?2")
-	//@NamedQuery(name="User.getAnswers", query="SELECT a FROM Answer a WHERE a.uidx = :user")
-//})
+@NamedQueries({
+	@NamedQuery(name = "User.checkCredentials", query = "SELECT r FROM User r  WHERE r.username = :username and r.password = :password"),
+	@NamedQuery(name="User.getAnswers", query="SELECT a FROM Answer a WHERE a.uidx = :user AND a.questidx.qidx = :questionnaire")
+})
 public class User implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -30,14 +30,19 @@ public class User implements Serializable {
 	
 	private String last_login;
 	
-	//@OneToMany(fetch = FetchType.EAGER, mappedBy = "uidx", cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
-		//	CascadeType.REFRESH })
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "uidx", cascade = { CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH },  orphanRemoval=true)
 	
-	//private List<Answer> answers;
+	private List<Answer> answers;
 	
 	public User() {
 	}
-
+	
+	public User(String username, String password, String email) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.role = "ActiveUser";
+	}
 	public int getId() {
 		return this.uid;
 	}
@@ -85,7 +90,7 @@ public class User implements Serializable {
 		this.role = role;
 	}
 
-	/*public List<Answer> getAnswers() {
+	public List<Answer> getAnswers() {
 		return this.answers;
 	}
 	
@@ -98,7 +103,7 @@ public class User implements Serializable {
 		getAnswers().remove(answer);
 	}
 	
-	*/
+	
 }
 
 

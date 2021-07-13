@@ -8,6 +8,11 @@
 		<jta-data-source>gma</jta-data-source>
 		<class>it.polimi.gma.entities.Answer</class>
 		<class>it.polimi.gma.entities.User</class>
+		<class>it.polimi.gma.entities.Product</class>
+		<class>it.polimi.gma.entities.Leaderboard</class>
+		<class>it.polimi.gma.entities.Question</class>
+		<class>it.polimi.gma.entities.Questionnaire</class>
+		<class>it.polimi.gma.entities.BadWord</class>
 		<properties>
 			<property name="eclipselink.logging.level" value="FINE" />
 		</properties>

@@ -5,8 +5,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.NonUniqueResultException;
+
+import it.polimi.gma.entities.Answer;
+import it.polimi.gma.entities.Questionnaire;
 import it.polimi.gma.entities.User;
 import it.polimi.gma.exceptions.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -17,10 +22,11 @@ public class UserService {
 	public UserService() {
 	}
 
-	public User checkCredentials(String usrn, String pwd) throws CredentialsException, NonUniqueResultException {
+	public User checkCredentials(String usr, String pwd) throws CredentialsException, NonUniqueResultException {
 		List<User> uList = null;
 		try {
-			uList = em.createNamedQuery("User.checkCredentials", User.class).setParameter(1, usrn).setParameter(2, pwd).getResultList();
+			uList = em.createNamedQuery("User.checkCredentials", User.class).setParameter("username", usr).setParameter("password", pwd)
+					.getResultList();
 		} catch (PersistenceException e) {
 			throw new CredentialsException("Could not verify credentals");
 		}
@@ -31,6 +37,33 @@ public class UserService {
 		throw new NonUniqueResultException("More than one user registered with same credentials");
 
 	}
-
 	
+	public User createUser(String username, String password, String email) {
+		User user = new User(username, password, email);
+		
+		em.persist(user);
+		
+		return user;
+	}
+	
+	public void updateUser(User u) throws Exception {
+		try {
+			em.merge(u);
+		} catch (Exception e) {
+			throw new Exception("Could not update timestamp");
+		}
+	}
+	
+	public List<Answer> getAnswers(User user, int questionnaire) {
+		List<Answer> answerList = new ArrayList<>();
+		Questionnaire quest = em.find(Questionnaire.class, questionnaire);
+		try {
+			answerList = em.createNamedQuery("User.getAnswers", Answer.class).setParameter("user", user).setParameter("questionnaire", quest)
+					.getResultList();
+		} catch (PersistenceException e) {
+			throw new PersistenceException("Could not get the user answers");
+		}
+		
+		return answerList;
+	}
 }
