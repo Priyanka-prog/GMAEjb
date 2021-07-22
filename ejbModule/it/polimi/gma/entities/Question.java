@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "question", schema = "gma")
-@NamedQuery(name="Question.findQuestions", query="SELECT q FROM Question q WHERE q.qidx = :ID AND q.questtype = :type")
+@NamedQuery(name="Question.findQuestions", query="SELECT q FROM Question q WHERE q.qidx.qid = :ID AND q.questtype = :type")
 public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
 
