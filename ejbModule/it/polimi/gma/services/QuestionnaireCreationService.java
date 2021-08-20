@@ -21,14 +21,14 @@ public class QuestionnaireCreationService {
 	
 	public QuestionnaireCreationService() {}
 	
-	public void createQuestionnaire(String[] questions) {
+	public void createQuestionnaire(String[] questions, String[] questtype) {
 		Questionnaire questionnaire = new Questionnaire(questionnaireDate);
 		em.persist(questionnaire);
 		
 		questionnaire.setProduct(product);
 		
 		for (int i=0; i<questions.length; i++) {
-			Question q = new Question(questions[i], questionnaire);
+			Question q = new Question(questions[i], questionnaire,questtype[i]);
 			questionnaire.add(q);
 		}
 	}
