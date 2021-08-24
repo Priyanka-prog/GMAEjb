@@ -10,7 +10,7 @@ import java.util.List;
 
 @NamedQueries({
 	@NamedQuery(name = "User.checkCredentials", query = "SELECT r FROM User r  WHERE r.username = :username and r.password = :password"),
-	@NamedQuery(name="User.getAnswers", query="SELECT a FROM Answer a WHERE a.uidx = :user AND a.questidx.qidx = :questionnaire")
+	@NamedQuery(name="User.getAnswers", query="SELECT a FROM Answer a WHERE a.uidx = :user and a.questidx.qidx = :questionnaire"),
 })
 public class User implements Serializable {
 	

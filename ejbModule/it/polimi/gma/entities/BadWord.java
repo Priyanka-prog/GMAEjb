@@ -5,27 +5,21 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "offensivewords", schema = "gma")
+@Table(name = "badword", schema = "gma")
 @NamedQuery(name = "BadWord.getAllWords", query = "SELECT w FROM BadWord w")
 public class BadWord implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private String offensiveword;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private String word;
+	
 	public BadWord() {}
-	public int getID() {
-		return this.id;
-	}
-	public void setId(int id) {
-		this.id=id;
-	}
+	
 	public String getWord() {
-		return this.offensiveword;
+		return this.word;
 	}
 
-	public void setWord(String offensiveword) {
-		this.offensiveword = offensiveword;
+	public void setWord(String word) {
+		this.word = word;
 	}
 }
