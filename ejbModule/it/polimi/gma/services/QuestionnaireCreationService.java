@@ -28,7 +28,7 @@ public class QuestionnaireCreationService {
 		questionnaire.setProduct(product);
 		
 		for (int i=0; i<questions.length; i++) {
-			Question q = new Question(questions[i], questionnaire,questtype[i]);
+			Question q = new Question(questions[i], questionnaire);
 			questionnaire.add(q);
 		}
 	}

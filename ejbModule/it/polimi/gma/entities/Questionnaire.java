@@ -32,10 +32,6 @@ public class Questionnaire implements Serializable {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "qidx", cascade = { CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
 	private List<Question> questions = new ArrayList<>();
-	
-	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "qidx1", cascade = { CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
-	private List<Answer> answers = new ArrayList<>();
-	*/
 
 	public Questionnaire() {
 	}
@@ -85,17 +81,5 @@ public class Questionnaire implements Serializable {
 	public void removeQuestion(Question question) {
 		getQuestions().remove(question);
 	}
-	
-	/*public List<Answer> getAnswers() {
-		return this.answers;
-	}
 
-	public void addAnswer(Answer answers) {
-		answers.add(answers);
-		answers.setQuestionnaire(this);
-	}
-
-	public void removeAnswer(Answer answers) {
-		getAnswers().remove(answers);
-	}*/
 }

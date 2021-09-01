@@ -30,10 +30,10 @@ public class Question implements Serializable {
 
 	public Question() {}
 	
-	public Question(String question, Questionnaire questionnaire, String questtype) {
+	public Question(String question, Questionnaire questionnaire) {
 		this.question = question;
 		this.qidx = questionnaire;
-		this.questtype = questtype;
+		this.questtype = "Marketing";
 	}
 	
 	public int getID() {

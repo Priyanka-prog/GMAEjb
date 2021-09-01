@@ -48,8 +48,8 @@ public class QuestionService {
 			return questions;
 	}
 	
-	public void submitQuestion(String quest, Questionnaire questionnaire, String questtype) {
-		Question question = new Question(quest, questionnaire, questtype);
+	public void submitQuestion(String quest, Questionnaire questionnaire) {
+		Question question = new Question(quest, questionnaire);
 		
 		em.merge(question);
 	}
