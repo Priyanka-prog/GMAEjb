@@ -30,7 +30,7 @@ public class User implements Serializable {
 	
 	private String last_login;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "uidx", cascade = { CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH },  orphanRemoval=true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "uidx", cascade = { CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH },  orphanRemoval=true)
 	
 	private List<Answer> answers;
 	
